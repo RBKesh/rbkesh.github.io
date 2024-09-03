@@ -1,28 +1,16 @@
-document.addEventListener("scroll", function() {
-    const aboutSection = document.querySelector(".about");
-    const skillsSection = document.querySelector(".skills");
-    const contactSection = document.querySelector(".contact");
+function handleScroll() {
+    const sections = document.querySelectorAll("section");
 
-    if (window.scrollY > aboutSection.offsetTop - window.innerHeight / 1.5) {
-        aboutSection.classList.add("slide-in");
-    }
+    sections.forEach(section => {
+        const sectionTop = section.getBoundingClientRect().top;
+        const triggerPoint = window.innerHeight / 1.2;
 
-    if (window.scrollY > skillsSection.offsetTop - window.innerHeight / 1.5) {
-        skillsSection.classList.add("slide-in");
-    }
+        if (sectionTop < triggerPoint) {
+            section.classList.add("show");
+        } else {
+            section.classList.remove("show");
+        }
+    });
+}
 
-    if (window.scrollY > contactSection.offsetTop - window.innerHeight / 1.5) {
-        contactSection.classList.add("slide-in");
-    }
-});
-
-document.querySelectorAll("section").forEach((section) => {
-    section.style.opacity = 0;
-    section.style.transform = "translateY(100px)";
-});
-
-document.querySelectorAll(".slide-in").forEach((section) => {
-    section.style.opacity = 1;
-    section.style.transform = "translateY(0)";
-    section.style.transition = "opacity 1s, transform 1s";
-});
+document.addEventListener("scroll", handleScroll);
