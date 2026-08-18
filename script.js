@@ -213,6 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const projectData = {
         'Smart Mirror': {
             title: 'Smart Mirror',
+            image: 'images/smart-mirror.jpg',
             imgCoords: 'linear-gradient(45deg, #4f46e5, #ec4899)',
             tags: ['Raspberry Pi', 'Python', 'APIs'],
             desc: `
@@ -231,6 +232,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         'Open Source Recycled Plastic Pelletizer': {
             title: 'Open Source Recycled Plastic Pelletizer',
+            video: 'images/pelletizer.mp4',
             imgCoords: 'linear-gradient(45deg, #06b6d4, #3b82f6)',
             tags: ['Hardware', 'Engineering', 'Sustainability'],
             desc: `
@@ -281,9 +283,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function openModal(data) {
+        const mediaHeader = data.video
+            ? `<video src="${data.video}" autoplay loop muted playsinline style="width: 100%; height: 250px; object-fit: cover; border-radius: 12px; margin-bottom: 20px;"></video>`
+            : data.image
+            ? `<img src="${data.image}" alt="${data.title}" style="width: 100%; height: 250px; object-fit: cover; border-radius: 12px; margin-bottom: 20px;">`
+            : `<div style="width: 100%; height: 250px; background: ${data.imgCoords}; border-radius: 12px; margin-bottom: 20px;"></div>`;
+
         // Construct HTML
         const html = `
-            <div style="width: 100%; height: 250px; background: ${data.imgCoords}; border-radius: 12px; margin-bottom: 20px;"></div>
+            ${mediaHeader}
             <h2 class="modal-title">${data.title}</h2>
             <div class="modal-tags">
                 ${data.tags.map(tag => `<span class="modal-tag">${tag}</span>`).join('')}
